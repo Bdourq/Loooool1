@@ -7,38 +7,40 @@ function TankoContent() {
   const name = searchParams.get("name") || "عزيزتي";
 
   return (
-    <div className="min-h-screen bg-[#fdfbf7] flex items-center justify-center p-4">
-      {/* بطاقة الشكر - بتصميم دار أزياء */}
-      <div className="max-w-lg w-full bg-white p-10 md:p-16 rounded-[3rem] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.1)] border border-[#d4af37]/10 text-center">
+    <div className="min-h-screen bg-[#fcfaf7] flex items-center justify-center p-6 font-sans">
+      <div className="max-w-md w-full bg-white p-12 rounded-[2.5rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.08)] border border-[#e5e0d8] text-center">
         
-        {/* أيقونة ذهبية رقيقة */}
-        <div className="mb-8">
-          <span className="text-5xl">✨</span>
+        {/* أيقونة ذهبية بتصميم رفيع */}
+        <div className="mx-auto w-16 h-16 mb-8 flex items-center justify-center bg-[#fdfaf7] rounded-full border border-[#d4af37]/20">
+          <span className="text-3xl">✨</span>
         </div>
 
-        <h1 className="text-4xl font-serif font-light text-[#1a1a1a] mb-6 tracking-wide">
-          تم اعتماد طلبك
+        <h1 className="text-3xl font-serif font-medium text-[#1a1a1a] mb-4 tracking-tight">
+          تم استلام طلبك
         </h1>
         
-        <p className="text-[#666] text-lg mb-10 leading-relaxed font-light">
-          أهلاً بكِ <span className="font-semibold text-[#1a1a1a]">{name}</span>، <br />
-          لقد استقبلنا تفاصيل طلبك بكل اهتمام. بدأ فريق "لقطة كوليكشن" الآن في مرحلة القص والتفصيل الخاص لقطعتك الفريدة.
+        <p className="text-[#666] text-lg leading-relaxed mb-10 font-light">
+          شكراً لثقتك يا <span className="font-semibold text-[#1a1a1a]">{name}</span>. <br/>
+          فريق "لقطة كوليكشن" بدأ الآن بتجهيز طلبك المخصص بكل عناية.
         </p>
 
-        {/* صندوق معلومات الاتصال */}
-        <div className="py-6 border-y border-[#f0f0f0] mb-10">
-          <p className="text-sm uppercase tracking-widest text-[#999] mb-2 font-bold">الخطوة القادمة</p>
-          <p className="text-[#1a1a1a] font-medium">سنتصل بكِ قريباً لتأكيد القياسات وموعد التسليم المخصص لكِ.</p>
+        {/* بطاقة معلومات الطلب */}
+        <div className="space-y-6 mb-12">
+          <div className="p-5 rounded-2xl bg-[#fcfaf7] border border-[#f0ede5]">
+            <p className="text-[10px] uppercase tracking-[0.2em] text-[#b3a48e] font-bold mb-1">الخطوة القادمة</p>
+            <p className="text-[#1a1a1a] text-sm font-medium">سنتواصل معكِ هاتفياً لتأكيد القياسات النهائية وتحديد موعد التسليم.</p>
+          </div>
         </div>
 
-        {/* زر الواتساب - بتصميم غير متطفل */}
+        {/* خيار الواتساب (اختياري وبأناقة) */}
         <a 
-          href="https://wa.me/962775347250" 
+          href={`https://wa.me/962775347250?text=أهلاً لقطة كوليكشن، أود متابعة طلبي - ${name}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-3 text-[#d4af37] border border-[#d4af37] px-8 py-4 rounded-full font-bold hover:bg-[#d4af37] hover:text-white transition-all duration-300"
+          className="group inline-flex items-center gap-2 text-[#d4af37] border-b border-[#d4af37] pb-1 font-semibold text-sm hover:text-[#b8962d] hover:border-[#b8962d] transition-all duration-300"
         >
-          متابعة الطلب عبر الواتساب
+          أو تابعي الطلب عبر واتساب 
+          <span className="transition-transform group-hover:translate-x-1">→</span>
         </a>
       </div>
     </div>
@@ -47,7 +49,7 @@ function TankoContent() {
 
 export default function Tanko() {
   return (
-    <Suspense fallback={<div className="text-[#1a1a1a] animate-pulse">جاري التحميل...</div>}>
+    <Suspense fallback={<div className="text-sm text-[#999] animate-pulse">جاري التحميل...</div>}>
       <TankoContent />
     </Suspense>
   );
