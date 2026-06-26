@@ -1,4 +1,61 @@
-// استبدل الجزء الخاص بالعنوان والنموذج في ملف OrderForm.js بهذا الكود:
+"use client";
+import { useState } from "react";
+import { User, Phone, MapPin, Home, Ruler, Weight } from "lucide-react";
+import { GOVERNORATES } from "../app/data";
+
+const inputCls = "w-full px-4 py-3 rounded-xl bg-white border border-gold/20 focus:border-gold focus:outline-none text-royalDark placeholder:text-earth/50";
+
+function Field({ icon: Icon, children }) {
+  return (
+    <div className="relative">
+      <div className="absolute right-3 top-1/2 -translate-y-1/2 text-gold pointer-events-none">
+        <Icon size={18} />
+      </div>
+      <div className="pr-11">{children}</div>
+    </div>
+  );
+}
+
+export default function OrderForm({ quantity, setQuantity, color, setColor, formRef }) {
+  const [form, setForm] = useState({
+    name: "",
+    phone: "",
+    gov: GOVERNORATES[0],
+    address: "",
+    height: "",
+    weight: "",
+  });
+  const [submitting, setSubmitting] = useState(false);
+
+  const set = (field) => (e) => setForm({ ...form, [field]: e.target.value });
+
+  const submit = async (e) => {
+    e.preventDefault();
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, quantity, color }),
+      });
+      if (res.ok) {
+        alert("تم تأكيد الحجز! سنتواصل معكِ قريباً.");
+        setForm({
+          name: "",
+          phone: "",
+          gov: GOVERNORATES[0],
+          address: "",
+          height: "",
+          weight: "",
+        });
+      } else {
+        alert("حدث خطأ، يرجى المحاولة مرة أخرى.");
+      }
+    } catch (err) {
+      alert("حدث خطأ، يرجى المحاولة مرة أخرى.");
+    }
+    setSubmitting(false);
+  };
 
   return (
     <section ref={formRef} className="py-10 scroll-mt-20">
@@ -29,3 +86,4 @@
       </div>
     </section>
   );
+}
