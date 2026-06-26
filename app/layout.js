@@ -1,5 +1,6 @@
 import { Tajawal } from 'next/font/google';
 import { Amiri } from 'next/font/google';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 
 const tajawal = Tajawal({ subsets: ['arabic'], weight: ['400', '700'], variable: '--font-tajawal' });
@@ -40,6 +41,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className={`${tajawal.variable} ${amiri.variable}`}>
         {children}
+        <SpeedInsights />
       </body>
     </html>
   );
